@@ -10,7 +10,7 @@ const contentToCache = [
 
 self.addEventListener('install', function (e) {
     console.log('[Service Worker] Install');
-    
+
     e.waitUntil((async function () {
       const cache = await caches.open(cacheName);
       console.log('[Service Worker] Caching all: app shell and content');
@@ -19,7 +19,7 @@ self.addEventListener('install', function (e) {
 });
 
 self.addEventListener('fetch', function (e) {
-    if (!(evt.request.url.indexOf('http') === 0)) return; 
+    if (!(e.request.url.indexOf('http') === 0)) return;
     e.respondWith((async function () {
       let response = await caches.match(e.request);
       console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
